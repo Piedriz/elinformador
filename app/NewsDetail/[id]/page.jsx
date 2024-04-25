@@ -76,9 +76,10 @@ export async function generateMetadata({params}){
     description:news.data.subtitle,
     openGraph:{
       title:news.data.title,
-      description:news.data.title,
+      description:news.data.subtitle,
       url: `NewsDetail/${id}`,
-      
+      image: news.data.image
+
     }
   }
   
