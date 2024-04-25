@@ -67,6 +67,23 @@ const fetchNews = async (id) => {
   }
 };
 
+export async function generateMetadata({params}){
+  const { id } = params;
+  const {news,error} = await fetchNews(id)
+  
+  return{
+    title:news.data.title,
+    description:news.data.subtitle,
+    openGraph:{
+      title:news.data.title,
+      description:news.data.title,
+      url: `NewsDetail/${id}`,
+      
+    }
+  }
+  
+}
+
 const NewsDetail = async ({ params }) => {
   const { id } = params;
   const { news, error } = await fetchNews(id);
@@ -75,22 +92,7 @@ const NewsDetail = async ({ params }) => {
 
   return (
     <>
-    <Head>
-        <title>{title}</title>
-        <meta name="description" content={subtitle} />
-        
-        {/* Open Graph para Facebook, LinkedIn, etc. */}
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={subtitle} />
-        <meta property="og:image" content={image} />
-        <meta property="og:url" content={`https://tu-sitio.com/NewsDetail/${id}`} />
-        
-        {/* Twitter Cards */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={subtitle} />
-        <meta name="twitter:image" content={image} />
-      </Head>
+
       <Header fixed>
         <NavBar />
         <SocialBar />
