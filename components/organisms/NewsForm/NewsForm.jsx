@@ -50,8 +50,25 @@ export const NewsForm = ({ onSuccess }) => {
         }
     };
 
-    function handleImageUpload(event) {
+    async function handleImageUpload(event) {
         const file = event.target.files[0];
+        const data = new FormData();
+        data.append("file",file);
+        data.append("upload_preset","images")
+        data.append("cloud_name","piedriz")
+
+        const res = await fetch(
+            "https://api.cloudinary.com/v1_1/piedriz/image/upload",
+            {
+                method:"POST",
+                body: data
+            }
+        )
+        const im = await res.json();
+        console.log(res)    
+        console.log(im.secure_url)
+        setValue('image_url',im.secure_url)
+
         const progressBarImage = document.getElementById('progressBarImage');
 
         const reader = new FileReader();

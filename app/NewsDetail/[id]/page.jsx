@@ -78,7 +78,7 @@ export async function generateMetadata({params}){
       title:news.data.title,
       description:news.data.subtitle,
       url: `NewsDetail/${id}`,
-      image: news.data.image
+      image: news.data.image_url
 
     }
   }
@@ -88,7 +88,7 @@ export async function generateMetadata({params}){
 const NewsDetail = async ({ params }) => {
   const { id } = params;
   const { news, error } = await fetchNews(id);
-  const { title, subtitle, image } = news.data;
+  //const { title, subtitle, image_url } = news.data;
   
 
   return (
