@@ -78,7 +78,7 @@ export async function generateMetadata({params}){
       title:news.data.title,
       description:news.data.subtitle,
       url: `NewsDetail/${id}`,
-      image: news.data.image_url
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrWyBdPab82G4CkZ-0EguGm9I10OCmgDSH3Cjq4M7C7g&s'
 
     }
   }
