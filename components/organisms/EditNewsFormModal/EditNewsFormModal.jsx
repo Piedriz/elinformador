@@ -9,7 +9,7 @@ import axios from "axios"
 import { DownloadPdfButton } from "../../molecules/DownloadPdfButton"
 export const EditNewsFormModal = ({ data,id }) => {
   
-  const { title, subtitle, lead, image, caption, file, body,statu } = data
+  const { title, subtitle, lead, image, caption, file, body,statu,url_image } = data
   const [toggle, setToggle] = useState(false)
   const [active, setActive] = useState(statu)
   const [imagen, setImagen] = useState(image)
@@ -24,6 +24,7 @@ export const EditNewsFormModal = ({ data,id }) => {
     setValue('image', image);
     setValue('id', id);
     setValue('statu',statu);
+    setValue('url_image',url_image);
   };
 
   useEffect(() => {
@@ -88,8 +89,26 @@ export const EditNewsFormModal = ({ data,id }) => {
   // };
 
 
-  function handleImageUpload(event) {
+  async function handleImageUpload(event) {
     const file = event.target.files[0];
+
+    const data = new FormData();
+        data.append("file",file);
+        data.append("upload_preset","images")
+        data.append("cloud_name","piedriz")
+
+        const res = await fetch(
+            "https://api.cloudinary.com/v1_1/piedriz/image/upload",
+            {
+                method:"POST",
+                body: data
+            }
+        )
+        const im = await res.json();
+        console.log(res)    
+        console.log(im.secure_url)
+        setValue('image_url',im.secure_url)
+
     const progressBarImage = document.getElementById('progressBarNewImage');
 
     const reader = new FileReader();
