@@ -19,7 +19,7 @@ export const ActionButton = ({ id,statu }) => {
         console.log({id:id,statu:statu})
 
         try {
-            const response = await axios.post(`https://back.infotolima.com/api/update/comment/${id}`, {id:id,statu:statu}, {
+            const response = await axios.post(`https://abogadosmartinezoficial.com/api/update/comment/${id}`, {id:id,statu:statu}, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

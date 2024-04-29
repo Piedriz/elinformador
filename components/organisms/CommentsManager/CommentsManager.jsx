@@ -17,7 +17,7 @@ export const CommentsManager = ({ id }) => {
 
     const fetchComments = async () => {
         try {
-            const response = await axios.get(`https://back.infotolima.com/api/admin/comment/${id}`);
+            const response = await axios.get(`https://abogadosmartinezoficial.com/api/admin/comment/${id}`);
             setComments(response.data.data);
             setLoading(false);
             console.log(response.data.data)

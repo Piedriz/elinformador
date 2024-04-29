@@ -30,7 +30,7 @@ export const CommentsForm = ({id}) => {
     const handleSubmitNews = async (data) => {
 
         try {
-            const response = await axios.post('https://back.infotolima.com/api/create/comment', data, {
+            const response = await axios.post('https://abogadosmartinezoficial.com/api/create/comment', data, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

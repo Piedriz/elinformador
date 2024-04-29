@@ -13,7 +13,7 @@ export const CommentsList = ({ id }) => {
 
     const fetchComments = async () => {
         try {
-            const response = await axios.get(`https://back.infotolima.com/api/show/comment/${id}`);
+            const response = await axios.get(`https://abogadosmartinezoficial.com/api/show/comment/${id}`);
             setComments(response.data.data); // Almacena los datos en el estado
             setLoading(false);
             console.log(response.data) // Indica que la carga ha terminado

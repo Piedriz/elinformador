@@ -39,7 +39,7 @@ export const EditNewsFormModal = ({ data,id }) => {
   const handleEditNews = async (data) => {
 
     try {
-      const response = await axios.post(`https://back.infotolima.com/api/update/publication/${id}`, data, {
+      const response = await axios.post(`https://abogadosmartinezoficial.com/api/update/publication/${id}`, data, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -70,7 +70,7 @@ export const EditNewsFormModal = ({ data,id }) => {
   const onSubmit = (newData) => {
     // filesComprobation(newData)
     handleEditNews(newData)
-    console.log(newData);
+    // console.log(newData);
     
   }
 
@@ -105,8 +105,8 @@ export const EditNewsFormModal = ({ data,id }) => {
             }
         )
         const im = await res.json();
-        console.log(res)    
-        console.log(im.secure_url)
+        // console.log(res)    
+        // console.log(im.secure_url)
         setValue('image_url',im.secure_url)
 
     const progressBarImage = document.getElementById('progressBarNewImage');

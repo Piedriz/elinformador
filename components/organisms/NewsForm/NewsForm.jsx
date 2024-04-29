@@ -38,7 +38,7 @@ export const NewsForm = ({ onSuccess }) => {
     const handleSubmitNews = async (data) => {
 
         try {
-            const response = await axios.post('https://back.infotolima.com/api/create/publication', data, {
+            const response = await axios.post('https://abogadosmartinezoficial.com/api/create/publication', data, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

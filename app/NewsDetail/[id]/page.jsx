@@ -60,7 +60,7 @@ import Head from 'next/head';
 
 const fetchNews = async (id) => {
   try {
-    const response = await axios.get(`https://back.infotolima.com/api/publication/${id}`);
+    const response = await axios.get(`https://abogadosmartinezoficial.com/api/publication/${id}`);
     return { news: response.data, error: null, };
   } catch (error) {
     return { news: null, error: error.message };
@@ -96,7 +96,7 @@ const NewsDetail = async ({ params }) => {
 
       <Header fixed>
         <NavBar />
-        <SocialBar />
+        
       </Header>
 
       <NewsDetailGrid>

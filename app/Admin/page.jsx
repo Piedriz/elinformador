@@ -18,7 +18,7 @@ const Admin = () => {
 
   const fetchPublication = async () => {
     try {
-      const response = await axios.get('https://back.infotolima.com/api/show/publication');
+      const response = await axios.get('https://abogadosmartinezoficial.com/api/show/publication');
       setNews(response.data); // Almacena los datos en el estado
       setLoading(false); // Indica que la carga ha terminado
     } catch (err) {

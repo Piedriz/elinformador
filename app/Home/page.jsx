@@ -10,16 +10,18 @@ import { useState, useEffect } from "react";
 import { LoadingSpinner } from "../../components/atoms/LoadingSpinner";
 import axios from "axios";
 
+
 const Home = () => {
     const [news, setNews] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    
 
 
     const fetchPublication = async () => {
        
         try {
-            const response = await axios.get('https://back.infotolima.com/api/list/publication');
+            const response = await axios.get('https://abogadosmartinezoficial.com/api/list/publication');
             console.log(response.data.data)
             setNews(response.data.data); // Almacena los datos en el estado
             setLoading(false); // Indica que la carga ha terminado
@@ -45,6 +47,7 @@ const Home = () => {
 
     return (
         <div>
+            
             <Header fixed>
                 <NavBar />
                 <SocialBar />
