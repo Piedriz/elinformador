@@ -7,7 +7,8 @@ import { Header } from "../../components/organisms/Header";
 import { NewsForm } from "../../components/organisms/NewsForm";
 
 import axios from "axios";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
+import { LoadingSpinner } from "../../components/atoms/LoadingSpinner";
 
 const Admin = () => {
 
@@ -33,7 +34,13 @@ const Admin = () => {
   }, [refetchTrigger]); // Solo se ejecuta una vez cuando se monta el componente
 
   if (loading) {
-    return <p>Cargando...</p>; // Mensaje mientras se cargan los datos
+    return (
+      <div className="flex justify-center items-center  w-full">
+        
+          <LoadingSpinner />
+        
+      </div>
+    ) // Mensaje mientras se cargan los datos
   }
 
   if (error) {
@@ -42,12 +49,12 @@ const Admin = () => {
   const triggerRefetch = () => {
     setRefetchTrigger(!refetchTrigger); // Cambia el estado para disparar el useEffect
   };
-  
+
   return (
     <>
       <Header>
         <NavBar />
-        
+
       </Header>
       <AdminSectionGrid>
         <NewsForm onSuccess={triggerRefetch} />

@@ -11,21 +11,28 @@ export const NewsForm = ({ onSuccess }) => {
 
     const [imagen, setImagen] = useState('')
     const [active, setActive] = useState(true)
+    const [destacada, setDestacada] = useState(false)
 
     const toggleActive = () => {
         setActive(!active)
         setValue('statu',!active)
+    }
+    const toggleDestacada = () => {
+        setDestacada(!destacada)
+        setValue('featured',!destacada)
     }
 
     const {
         register,
         handleSubmit,
         setValue,
+        reset,
         // watch,
         // formState: { errors },
     } = useForm({
         defaultValues: {
-            statu: active, // Valor predeterminado para el checkbox
+            statu: active,
+            featured:destacada, // Valor predeterminado para el checkbox
           },
     })
 
@@ -44,7 +51,8 @@ export const NewsForm = ({ onSuccess }) => {
                 },
             });
             console.log('Publicación creada:', response.data);
-            succesAlert()
+            succesAlert();
+            reset();
         } catch (error) {
             console.error('Error al crear la publicación:', error);
         }
@@ -171,8 +179,16 @@ export const NewsForm = ({ onSuccess }) => {
                     <textarea {...register('body')} name="body" id="body" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Cuerpo de la noticia" required />
                 </div>
                 <div>
+                    <label htmlFor="date" className="block mb-2 text-sm font-medium text-gray-900 ">Fecha</label>
+                    <input {...register('date')} name="date" id="date" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Fecha" required />
+                </div>
+                <div>
+                    <label htmlFor="view" className="block mb-2 text-sm font-medium text-gray-900 ">Visitas</label>
+                    <input {...register('view')} name="view" id="view" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Visitas" required />
+                </div>
+                <div>
                     <label className="block mb-2 text-sm font-medium text-gray-900 " htmlFor="multiple_files">Archivos</label>
-                    <input onChange={handleFileUpload} className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 p-2.5  focus:outline-none " id="multiple_files" type="file" multiple />
+                    <input onChange={handleFileUpload} className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 p-2.5  focus:outline-none " id="multiple_files" type="file"  />
                     <progress className="w-full h-1 rounded" id="progressBar" value="0" max="100"></progress>
                 </div>
 
@@ -183,6 +199,16 @@ export const NewsForm = ({ onSuccess }) => {
                         <p className="mr-4">Inactiva</p>
                         <div className="relative w-11 h-6 bg-red-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-red-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-green-600"></div>
                         <p className="ml-4">Activa</p>
+                    </label>
+                </div>
+
+                <div>
+                <label className="block mb-2 text-sm font-medium text-gray-900 ">Destacada</label>
+                    <label className="inline-flex items-center cursor-pointer">
+                        <input onChange={toggleDestacada} checked={destacada} type="checkbox" value="" className="sr-only peer" />
+                        <p className="mr-4">No</p>
+                        <div className="relative w-11 h-6 bg-red-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-red-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-green-600"></div>
+                        <p className="ml-4">Si</p>
                     </label>
                 </div>
                 <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  ">Subir noticia</button>

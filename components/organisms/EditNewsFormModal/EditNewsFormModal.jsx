@@ -7,11 +7,12 @@ import Swal from "sweetalert2"
 import PropTypes from 'prop-types'
 import axios from "axios"
 import { DownloadPdfButton } from "../../molecules/DownloadPdfButton"
-export const EditNewsFormModal = ({ data,id }) => {
-  
-  const { title, subtitle, lead, image, caption, file, body,statu,url_image } = data
+export const EditNewsFormModal = ({ data, id }) => {
+
+  const { title, subtitle, lead, image, caption, file, body, statu, url_image, featured, views, date } = data
   const [toggle, setToggle] = useState(false)
   const [active, setActive] = useState(statu)
+  const [destacada, setDestacada] = useState(featured)
   const [imagen, setImagen] = useState(image)
 
   const initializeFormValues = () => {
@@ -23,8 +24,11 @@ export const EditNewsFormModal = ({ data,id }) => {
     setValue('file', file);
     setValue('image', image);
     setValue('id', id);
-    setValue('statu',statu);
-    setValue('url_image',url_image);
+    setValue('statu', statu);
+    setValue('featured', featured);
+    setValue('views', views);
+    setValue('date', date);
+    setValue('url_image', url_image);
   };
 
   useEffect(() => {
@@ -33,8 +37,12 @@ export const EditNewsFormModal = ({ data,id }) => {
 
   const toggleActive = () => {
     setActive(!active)
-    setValue('statu',!active)
-}
+    setValue('statu', !active)
+  }
+  const toggleDestacada = () => {
+    setDestacada(!destacada)
+    setValue('featured', !destacada)
+  }
 
   const handleEditNews = async (data) => {
 
@@ -71,7 +79,7 @@ export const EditNewsFormModal = ({ data,id }) => {
     // filesComprobation(newData)
     handleEditNews(newData)
     // console.log(newData);
-    
+
   }
 
   // const filesComprobation = (newData) => {
@@ -93,21 +101,21 @@ export const EditNewsFormModal = ({ data,id }) => {
     const file = event.target.files[0];
 
     const data = new FormData();
-        data.append("file",file);
-        data.append("upload_preset","images")
-        data.append("cloud_name","piedriz")
+    data.append("file", file);
+    data.append("upload_preset", "images")
+    data.append("cloud_name", "piedriz")
 
-        const res = await fetch(
-            "https://api.cloudinary.com/v1_1/piedriz/image/upload",
-            {
-                method:"POST",
-                body: data
-            }
-        )
-        const im = await res.json();
-        // console.log(res)    
-        // console.log(im.secure_url)
-        setValue('image_url',im.secure_url)
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/piedriz/image/upload",
+      {
+        method: "POST",
+        body: data
+      }
+    )
+    const im = await res.json();
+    // console.log(res)    
+    // console.log(im.secure_url)
+    setValue('image_url', im.secure_url)
 
     const progressBarImage = document.getElementById('progressBarNewImage');
 
@@ -236,6 +244,14 @@ export const EditNewsFormModal = ({ data,id }) => {
                 <textarea  {...register('body')} name="body" id="body" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Cuerpo de la noticia" required />
               </div>
               <div>
+                <label htmlFor="date" className="block mb-2 text-sm font-medium text-gray-900 ">Fecha</label>
+                <input {...register('date')} name="date" id="date" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Fecha" required />
+              </div>
+              <div>
+                <label htmlFor="view" className="block mb-2 text-sm font-medium text-gray-900 ">Visitas</label>
+                <input {...register('view')} name="view" id="view" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Visitas" required />
+              </div>
+              <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 " htmlFor="multiple_files">Archivos</label>
                 <input onChange={handleFileUpload} className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 p-2.5  focus:outline-none " id="multiple_files" type="file" multiple />
                 <p className="mt-4">Archivos subidos</p>
@@ -253,6 +269,16 @@ export const EditNewsFormModal = ({ data,id }) => {
                 </label>
               </div>
 
+              <div>
+                <label className="block mb-2 text-sm font-medium text-gray-900 ">Destacada</label>
+                <label className="inline-flex items-center cursor-pointer">
+                  <input onChange={toggleDestacada} checked={destacada} type="checkbox" value="" className="sr-only peer" />
+                  <p className="mr-4">No</p>
+                  <div className="relative w-11 h-6 bg-red-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-red-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-green-600"></div>
+                  <p className="ml-4">Si</p>
+                </label>
+              </div>
+
               <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  ">Editar noticia</button>
             </form>
           </div>
@@ -265,5 +291,5 @@ export const EditNewsFormModal = ({ data,id }) => {
 
 EditNewsFormModal.propTypes = {
   data: PropTypes.object,
-  id:PropTypes.number
+  id: PropTypes.number
 }

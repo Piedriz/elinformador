@@ -56,6 +56,7 @@ import { NewsDetailGrid } from '../../../components/templates/NewsDetailGrid';
 import { NavBar } from '../../../components/molecules/NavBar';
 import { SocialBar } from '../../../components/molecules/SocialBar';
 import { Header } from '../../../components/organisms/Header';
+import { OutstandingNews } from '../../../components/organisms/OutstandingNews';
 import Head from 'next/head';
 
 const fetchNews = async (id) => {
@@ -106,6 +107,8 @@ const NewsDetail = async ({ params }) => {
           <NewsDetailCard news={news} />
         )}
       </NewsDetailGrid>
+
+      <OutstandingNews/>
     </>
   );
 };

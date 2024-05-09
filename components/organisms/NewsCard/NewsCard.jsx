@@ -9,20 +9,27 @@ import { NewsTitle } from "../../atoms/NewsTitle/NewsTitle"
 import { NewsTag } from "../../molecules/NewsTag"
 import PropTypes from 'prop-types'
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+
 
 
 export const NewsCard = ({newsData}) => {
-    const { id, title, image, subtitle, caption, lead,created_at} = newsData;
+    const { id, title, image, subtitle, caption, lead,date} = newsData;
+    const router = useRouter();
+    const handleCardClick = () => {
+        // Redirige a la página de detalle de noticias
+        router.push(`/NewsDetail/${id}`);
+      };
     
     
-    console.log(newsData)
-    console.log(`Redirecting to NewsDetail with ID: ${id}`);
-
+    
+    
     
     return (
-        <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow animate-fadeIn">           
+        
+        <div onClick={()=>{handleCardClick()}} className="cursor-pointer z-10 hover:scale-105 group-hover:shadow-xl transition-transform transform min-w-xl  p-6 bg-white border border-gray-200 rounded-lg shadow ">           
             {/* {loading? <p>Cargando...</p> : ''} */}
-            <NewsTag create={created_at} />
+            <NewsTag create={date} />
             <NewsTitle title={title} />
             <NewsSubtitle subtitle={subtitle} />
             <NewsImage image={image} />
@@ -39,6 +46,7 @@ export const NewsCard = ({newsData}) => {
             </Link>
             
         </div>
+        
     )
 }
 

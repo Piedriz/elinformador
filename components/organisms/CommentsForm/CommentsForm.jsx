@@ -11,6 +11,7 @@ export const CommentsForm = ({id}) => {
     const {
         register,
         handleSubmit,
+        reset,
         // setValue,
         // watch,
         // formState: { errors },
@@ -37,6 +38,7 @@ export const CommentsForm = ({id}) => {
             });
             console.log('comentario creada:', response.data);
             succesAlert()
+            reset()
         } catch (error) {
             console.error('Error al crear el comentario:', error);
         }

@@ -1,12 +1,18 @@
 import { CommentsManager } from "../CommentsManager"
+import { DeleteNews } from "../DeleteNews"
 import { EditNewsFormModal } from "../EditNewsFormModal"
+import { useState } from "react"
 import PropTypes from 'prop-types'
 
 export const NewsTable = ({ data }) => {
-    console.log(data)
+    const [initialData, setInitialData] = useState(data);
+
+    const handleDeleteNews = (id) => {
+        // Eliminar la noticia del estado
+        setInitialData((prevData) => prevData.filter((item) => item.id !== id));
+    };
+    
     return (
-
-
         <div className="relative  overflow-x-auto shadow-md sm:rounded-lg">
             <div className="pb-4 bg-blue-600 pt-4">
                 <label htmlFor="table-search" className="sr-only">Search</label>
@@ -36,9 +42,10 @@ export const NewsTable = ({ data }) => {
                                 {item.title}
                             </td>
                             
-                            <td className="px-6 py-4 gap-2">
+                            <td className="px-6 py-4 gap-2 flex justify-center flex-col">
                                 <EditNewsFormModal data={item} id={item.id}  />
                                 <CommentsManager id={item.id}/>
+                                <DeleteNews id={item.id}/>
                                 
                             </td>
                         </tr>
