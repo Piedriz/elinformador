@@ -27,7 +27,7 @@ export const NewsDetailCard = ({ news }) => {
 
 
     return (
-        <div className="max-w-4xl p-6 bg-white rounded-lg ">
+        <div className="max-w-4xl  bg-white rounded-lg ">
 
             <div className="flex row justify-between align-middle">
                 <NewsTag create={date} />

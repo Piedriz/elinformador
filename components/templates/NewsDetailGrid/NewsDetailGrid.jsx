@@ -14,7 +14,7 @@ export const NewsDetailGrid = ({ children }) => {
 
       </div>
 
-      <div className='max-w-3xl w-full xl:max-w-sm  px-10 flex flex-col gap-10 flex-wrap'>
+      <div className='max-w-3xl w-full xl:max-w-sm  xl:px-10 flex flex-col gap-10 flex-wrap'>
         <ContactForm />
         <VisitsGraphic />
       </div>
